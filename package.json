@@ -1,0 +1,27 @@
+{
+  "name": "nicholasbot",
+  "version": "1.0.0",
+  "description": "Secret Nicholas Bot for KMA",
+  "main": "src/index.js",
+  "author": "Danyil Karuna <kd@oked.me>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon ./src/index.js --exec babel-node",
+    "build": "babel ./src --out-dir ./dist"
+  },
+  "dependencies": {
+    "csv": "^2.0.0",
+    "dotenv": "^4.0.0",
+    "moment": "^2.19.3",
+    "ramda": "^0.25.0",
+    "sequelize": "^4.27.0",
+    "sqlite3": "^3.1.13",
+    "telegraf": "^3.17.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "nodemon": "^1.12.5"
+  }
+}
