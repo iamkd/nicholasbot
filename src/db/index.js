@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+import mongoose from 'mongoose';
 import path from 'path';
 import * as R from 'ramda';
 
@@ -8,18 +8,12 @@ import arrayShuffle from 'array-shuffle';
 
 import userSchema from './models/User';
 
-const sequelize = new Sequelize('nicholasdb', 'bot', process.env.BOT_PASSWORD, {
-  dialect: 'sqlite',
-  storage: path.resolve(__dirname, './data.db')
-});
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost/nicholas');
 
-export const User = userSchema(sequelize);
+export const User = mongoose.model('User', userSchema);
 
-User.hasOne(User, { as: 'pair' });
-
-User.sync();
-
-// User.sync({ force: true }).then(() => {
+// User.remove({}).then(() =>
 //   csvParse(
 //     fs.readFileSync(path.resolve(__dirname, './data.csv'), 'utf8'),
 //     async (err, result) => {
@@ -38,21 +32,27 @@ User.sync();
 //         result
 //       );
 
-//       R.forEach(user => User.create(user), objects);
+//       const mapIndexed = R.addIndex(R.map);
+//       await Promise.all(
+//         mapIndexed(
+//           (user, index) => User.create({ ...user, count: index + 1 }),
+//           objects
+//         )
+//       );
 
-//       const users = await User.findAll();
-//       const userIds = R.map(user => user.get('id'), users);
+//       const users = await User.find({}).exec();
+//       const userIds = R.map(user => user.id, users);
 //       const shuffledIds = arrayShuffle(userIds);
-
 //       const pairs = R.aperture(2, shuffledIds).concat([
 //         [R.last(shuffledIds), R.head(shuffledIds)]
 //       ]);
 
 //       R.forEach(async ([userId, targetId]) => {
-//         const user = await User.findById(userId);
-//         const target = await User.findById(targetId);
-//         user.setPair(target);
+//         const user = await User.findById(userId).exec();
+//         const target = await User.findById(targetId).exec();
+//         user.pairId = target.id;
+//         user.save();
 //       }, pairs);
 //     }
-//   );
-// });
+//   )
+// );

@@ -1,0 +1,29 @@
+html
+  head
+    title St. Nicholas Stats
+    link(rel="stylesheet", href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb", crossorigin="anonymous")
+  body
+    table.table.table-responsive
+      thead
+        tr
+          th Номер
+          th Ім'я
+          th Факультет
+          th Рік
+          th Пара
+          th Використав бота
+          th Телефон
+          th Фейсбук
+          th Телеграм
+      each user in users
+        - const activated = !!user.telegramId
+        tr(class={"table-danger": !activated})
+          td= user.count
+          td= user.name
+          td= user.faculty
+          td= user.year
+          td= users.find(u => u.pairId === user.id).name
+          td= activated ? "Так" : "Ні"
+          td= user.phoneNumber          
+          td= user.facebook          
+          td= user.telegram          
