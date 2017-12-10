@@ -22,7 +22,7 @@ html
           td= user.name
           td= user.faculty
           td= user.year
-          td= users.find(u => u.pairId === user.id).name
+          td= users.find(u => user.pairId === u.id).name
           td= activated ? "Так" : "Ні"
           td= user.phoneNumber          
           td= user.facebook          
