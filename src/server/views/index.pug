@@ -27,5 +27,6 @@ html
           td= pairName
           td= activated ? "Так" : "Ні"
           td= user.phoneNumber          
-          td= user.facebook          
+          td 
+            a(href=user.facebook)= user.facebook          
           td= user.telegram          
